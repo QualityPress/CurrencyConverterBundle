@@ -35,7 +35,7 @@ services:
     ### Gerenciador de provedores
     currency_converter.manager.provider:
         class           : "%quality_currency_converter.provider_manager.class%"
-        public          : false
+        public          : true
         arguments       : []
         
     ### Gerenciador da conversão junto ao banco de dados

@@ -25,18 +25,18 @@ abstract class ConversionOperator implements ConversionOperatorInterface
     protected abstract function createConversion();
     
     /**
-     * Efetua a localização do provedor através do nome de identificação.
-     * 
-     * @return ProviderInterface
-     */
-    protected abstract function getProvider($name);
-    
-    /**
      * Verifica o tempo definido para sobrevivência de uma pesquisa. 
     * 
      * @return integer
      */
     protected abstract function getTimeToLive();
+    
+    /**
+     * Efetua a localização do provedor através do nome de identificação.
+     * 
+     * @return ProviderInterface
+     */
+    public abstract function getProvider($name);
     
     /**
      * Localizar última conversão.

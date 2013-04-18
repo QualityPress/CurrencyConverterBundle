@@ -69,7 +69,7 @@ class ConversionManager extends ConversionOperator implements ConversionManagerI
         return new $class;
     }
     
-    protected function getProvider($provider)
+    public function getProvider($provider)
     {
         return $this->providerManager->get($provider);
     }

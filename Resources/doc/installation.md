@@ -1,9 +1,7 @@
 Installation
-------------
+============
 
-## Installation
-
-Installation is a quick (I promise!) 7 step process:
+São somente 4 passos para habilitar o bundle:
 
 1. [Configuração via composer](#enable-in-composer)
 2. [Habilitar o Bundle](#enable-bundle)
@@ -94,3 +92,17 @@ Agora falta somente executar o comando para atualizarmos nosso banco de dados:
 ``` bash
 $ php app/console doctrine:schema:update --em=default --force
 ```
+
+
+
+### Árvore da documentação
+
+Para facilitar sua visita na documentação, abaixo seguem informações
+dos títulos de cada passo referente a documentação.
+
+- [Provedores](providers.md)
+- [Gerenciador](manager.md)
+- [Formatação](formatter.md)
+- [Armazenamento](storage.md)
+- [Twig Helper](helper.md)
+- [Configuração de referência](configuration_reference.md)
