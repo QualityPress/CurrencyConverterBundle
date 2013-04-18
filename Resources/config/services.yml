@@ -1,0 +1,50 @@
+services:
+    currency_converter.entity_manager:
+        class           : "Doctrine\\ORM\\EntityManager"
+        factory_service : doctrine
+        factory_method  : getManager
+        public          : false
+        arguments       : []
+        
+    ### Formata valor por moeda
+    currency_converter.formatter:
+        class     : "%quality_currency_converter.formatter.class%"
+        arguments :
+            - "@service_container"
+            - "%quality_currency_converter.parameter.default_currency%"
+            - "%quality_currency_converter.parameter.transformers%"
+            
+    ### Currency storage
+    currency_converter.storage:
+        class     : "%quality_currency_converter.storage.class%"
+        arguments : 
+            - "@session"
+            - "%quality_currency_converter.parameter.storage_key%"
+            
+    ### Twig extension
+    currency_converter.twig.extension:
+        class     : "%quality_currency_converter.twig_extension.class%"
+        arguments : 
+            - "@currency_converter.formatter"
+            - "@currency_converter.manager"
+            - "@currency_converter.storage"
+            - "%quality_currency_converter.twig_extension.default_provider%"
+        tags:
+            - { name: twig.extension }
+        
+    ### Gerenciador de provedores
+    currency_converter.manager.provider:
+        class           : "%quality_currency_converter.provider_manager.class%"
+        public          : false
+        arguments       : []
+        
+    ### Gerenciador da conversão junto ao banco de dados
+    currency_converter.manager:
+        class           : "%quality_currency_converter.manager.class%"
+        public          : true
+        arguments       : 
+            - "@currency_converter.entity_manager"
+            - "@currency_converter.manager.provider"
+            - "%quality_currency_converter.conversion.class%"
+            - "%quality_currency_converter.time_to_live%"
+            

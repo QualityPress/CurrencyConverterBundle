@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    
+    <entity name="Quality\Bundle\CurrencyConverterBundle\Entity\Conversion" table="currency_conversions">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        
+        <field name="fromCurrency" column="from_currency" type="string" length="3" />
+        <field name="toCurrency" column="to_currency" type="string" length="3" />
+        
+        <field name="amount" column="amount" type="decimal" scale="5" />
+        <field name="convertedAmount" column="converted_amount" type="decimal" scale="5" />
+        <field name="rate" column="rate" type="decimal" scale="5" />
+        
+        <field name="registeredAt" column="registered_at" type="datetime" />
+    </entity>
+</doctrine-mapping>
