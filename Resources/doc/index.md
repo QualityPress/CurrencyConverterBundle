@@ -8,7 +8,7 @@ Guia de referência:
 
 [Instalação][1]
 
-[1]: <../Resources/doc/installation.md>
+[1]: <../installation.md>
 
 [Helpers][3]
 
@@ -16,5 +16,5 @@ Guia de referência:
 
 [Configuration Reference][2]
 
-[2]: <Resources/doc/configuration_reference.md>
+[2]: </../configuration_reference.md>
 
