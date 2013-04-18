@@ -8,7 +8,7 @@ Guia de referência:
 
 [Instalação][1]
 
-[1]: <Resources/doc/installation.md>
+[1]: <../Resources/doc/installation.md>
 
 [Helpers][3]
 
