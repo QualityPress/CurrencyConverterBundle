@@ -10,7 +10,7 @@ use Quality\Bundle\CurrencyConverterBundle\Storage\CurrencyStorage;
  * CurrencyExtension
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 class CurrencyExtension extends \Twig_Extension

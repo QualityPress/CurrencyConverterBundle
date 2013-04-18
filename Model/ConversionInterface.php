@@ -9,7 +9,7 @@ namespace Quality\Bundle\CurrencyConverterBundle\Model;
  * que a classe de conversão deverá conter.
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 interface ConversionInterface

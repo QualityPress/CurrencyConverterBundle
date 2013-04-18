@@ -9,7 +9,7 @@ use Quality\Bundle\CurrencyConverterBundle\Model\ConversionInterface;
  * ConversionOperator
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 abstract class ConversionOperator implements ConversionOperatorInterface

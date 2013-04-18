@@ -100,9 +100,10 @@ $ php app/console doctrine:schema:update --em=default --force
 Para facilitar sua visita na documentação, abaixo seguem informações
 dos títulos de cada passo referente a documentação.
 
-- [Provedores](providers.md)
-- [Gerenciador](manager.md)
-- [Formatação](formatter.md)
-- [Armazenamento](storage.md)
-- [Twig Helper](helper.md)
-- [Configuração de referência](configuration_reference.md)
+- [1. Instalação](installation.md)
+- [2. Provedores](providers.md)
+- [3. Gerenciador](manager.md)
+- [4. Formatação](formatter.md)
+- [5. Armazenamento](storage.md)
+- [6. Twig Helper](helper.md)
+- [7. Configuração de referência](configuration_reference.md)

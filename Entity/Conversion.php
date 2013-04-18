@@ -8,7 +8,7 @@ use Quality\Bundle\CurrencyConverterBundle\Model\Conversion as BaseConversion;
  * Conversion
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 class Conversion extends BaseConversion

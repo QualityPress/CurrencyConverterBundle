@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
  * Classe específica para criação de requisições externas.
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 class Request

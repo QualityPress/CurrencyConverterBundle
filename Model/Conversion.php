@@ -8,7 +8,7 @@ namespace Quality\Bundle\CurrencyConverterBundle\Model;
  * Classe com conteúdos de conversões realizadas junto aos provedores.
  * 
  * @author Jorge Vahldick <jvahldick@gmail.com>
- * @license Please view /Resources/meta/LICENCE
+ * @license Please view /Resources/meta/LICENSE
  * @copyright (c) 2013
  */
 abstract class Conversion implements ConversionInterface
