@@ -16,5 +16,5 @@ Guia de referência:
 
 [Configuration Reference][2]
 
-[2]: </../configuration_reference.md>
+[2]: <configuration_reference.md>
 
