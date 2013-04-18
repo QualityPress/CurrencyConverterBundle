@@ -1,53 +1,96 @@
 Installation
 ------------
 
+## Installation
+
+Installation is a quick (I promise!) 7 step process:
+
+1. [Configuração via composer](#enable-in-composer)
+2. [Habilitar o Bundle](#enable-bundle)
+3. [Configuração](#enable-configuration)
+4. [Atualizar banco de dados](#enable-database)
+
+### <a id="enable-in-composer" name="enable-in-composer"></a>
+### Passo 1: Configuração via composer
+
+Adicionar no seu arquivo composer.json:
+
+```js
+{
+    "require": {
+        "quality-press/currency-converter-bundle": "*"
+    }
+}
+```
+
+Após adicionar o bundle em seu composer, executar o comando para instalação.
+
+``` bash
+$ php composer.phar update quality-press/currency-converter-bundle
+```
+
+O Composer irá instalar o bundle no diretório: `vendor/quality-press`.
 
 
-List of twig functions to help on twig template:
+
+### <a id="enable-bundle" name="enable-bundle"></a>
+### Passo 2: Habilitar o Bundle
+
+Habilitar o Bundle no kernel:
+
+``` php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new new Quality\Bundle\CurrencyConverterBundle\QualityCurrencyConverterBundle(),
+    );
+}
+```
 
 
 
-1. [qp_content_render_content](#content-render)
+### <a id="enable-configuration" name="enable-configuration"></a>
+### Passo 3: Configuração
 
-2. [qp_content_render_context](#context-render)
+Seguem algumas configurações base para funcionamento do bundle:
 
-3. Bla [teste](#bla)
+``` yaml
+# app/config.yml
+
+### Conversor de moedas
+quality_currency_converter:
+    connection    : "default"
+        
+    ### Provedores de serviço
+    providers:
+        - "Quality\\Bundle\\CurrencyConverterBundle\\Extra\\Providers\\GoogleProvider"
+        - "Quality\\Bundle\\CurrencyConverterBundle\\Extra\\Providers\\XRateProvider"
+        - "Quality\\Bundle\\CurrencyConverterBundle\\Extra\\Providers\\YahooProvider"
+        
+    ### TwigExtension
+    twig_extension:
+        default_provider  : "google_provider"
+        
+    ### Transformador i18n
+    intl:
+        default_currency: "BRL"
+        transformers:
+            - {locale: "pt", currency: "BRL"}
+            - {locale: "es", currency: "EUR"}
+            - {locale: "en", currency: "USD"}
+```
 
 
-### <a id="content-render" name="content-render"></a>
-Render content:
 
-Lorem
+### <a id="enable-database" name="enable-database"></a>
+### Passo 4: Atualizar banco de dados
 
-Ipsum  
+Agora falta somente executar o comando para atualizarmos nosso banco de dados:
 
-
-Lorem
-
-Ipsum  
-
-
-Lorem
-
-Ipsum
-
-
-
-### <a id="context-render"></a>Context render
-Render context:
-
-teste
-
-Lorem
-
-Ipsum
-
-Lorem
-
-Ipsum
-
-Lorem
-
-Ipsum
-
-<a id="bla"></a>Teste
+``` bash
+$ php app/console doctrine:schema:update --em=default --force
+```

@@ -1,5 +1,5 @@
-Configuration Reference
-=======================
+Configurações de Referência
+===========================
 
 Segue abaixo as configurações possíveis para utilização do Bundle.
 

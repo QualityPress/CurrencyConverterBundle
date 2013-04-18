@@ -18,7 +18,18 @@ License
 
 Este bundle utiliza-se de MIT license. Veja licença completa no próprio Bundle:
 
-    Resources/meta/LICENSE<Resources/doc/installation.md>
+    Resources/meta/LICENSE
+
+[Leia a licença](Resources/meta/LICENSE)
+
+
+
+Instalação:
+-----------
+
+A documentação completa encontra-se em: `Resources/doc/installation.md`
+
+[Leia sobre a instalação](Resources/doc/installation.md)
 
 
 
