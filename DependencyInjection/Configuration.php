@@ -73,6 +73,7 @@ class Configuration implements ConfigurationInterface
                 
                 // Sessão
                 ->arrayNode('storage')
+		    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Storage\\CurrencyStorage')->end()
                         ->scalarNode('session_key')->defaultValue('_qualitypress.current-currency')->end()
