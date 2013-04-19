@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
         
                 // Classes
                 ->arrayNode('classes')
+					->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('formatter')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Helper\\CurrencyFormatter')->end()
                         ->scalarNode('conversion')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Entity\\Conversion')->end()

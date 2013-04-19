@@ -75,11 +75,12 @@ Para utilizar seu provedor é fácil:
 class fooController extends Controller
 {
     public function barAction()
+	{
         $provider = $this->get('currency_converter.manager.provider')->get('foo_provider');
         $value = $provider->convert('BRL', 'USD', 1);
 
         // $value for example = 0.49774
-    );
+    }
 }
 ```
 
