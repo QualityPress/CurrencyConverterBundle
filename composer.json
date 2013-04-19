@@ -1,0 +1,20 @@
+{
+    "name": "quality-press/currency-converter-bundle",
+    "type": "symfony-bundle",
+    "description": "CurrencyConverterBundle",
+    "keywords": ["currency converter", "currency"],
+    
+    "authors": [
+        {
+            "name": "Jorge Vahldick",
+            "email": "jvahldick@gmail.com"
+        },
+    ],
+            
+    "minimum-stability": "stable",
+    
+    "autoload": {
+        "psr-0": { "Quality\\Bundle\\CurrencyConverterBundle": "" }
+    },            
+    "target-dir": "Quality/Bundle/CurrencyConverterBundle"
+}
