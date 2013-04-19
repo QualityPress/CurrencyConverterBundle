@@ -44,7 +44,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new new Quality\Bundle\CurrencyConverterBundle\QualityCurrencyConverterBundle(),
+        new Quality\Bundle\CurrencyConverterBundle\QualityCurrencyConverterBundle(),
     );
 }
 ```
