@@ -11,6 +11,7 @@
         }
     ],
             
+    "license": "MIT",        
     "minimum-stability": "stable",
     
     "autoload": {
