@@ -41,26 +41,40 @@ class CurrencyFormatter implements CurrencyFormatterInterface
         return $this->format($amount, $this->getCurrencyByLocale());
     }
     
-    public function parseSymbol($amount, $currency = null)
+    public function parseSymbolByAmount($amount, $currency = null)
     {
-        $symbol = trim(str_replace($this->parseAmount($amount, $currency), '', $amount));
-        return $this->convertEncoding($symbol);
+        $amount = trim(str_replace($this->parseAmount($amount, $currency), '', $amount));        
+        return $this->convertEncoding($amount);
+    }
+    
+    public function parseSymbolByLocale($culture = null)
+    {
+        $culture = ($culture === null) ? $this->container->get('request')->getLocale() : $culture;
+        return $this->getFormatter($culture)->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
     
     public function parseAmount($amount, $currency = null)
     {
         $currency = (null === $currency) ? $this->getCurrencyByLocale() : $currency;
-        return $this->getFormatter()->parseCurrency($amount, $currency);
+        $amount = $this->getFormatter()->parseCurrency($amount, $currency);
+        return number_format($amount, 2, $this->getFormatter()->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL), '');
     }
     
-    public function getCurrencyByLocale($locale = null)
+    public function getCurrencyByLocale($locale = null, $byConfig = true)
     {
         $currency = $this->defaultCurrency;
-        $locale = ($locale !== null) ? $this->container->get('request')->getLocale() : $locale;
-        foreach ($this->transformers as $conversion) {
-            if ($locale == $conversion['locale']) {
-                $currency = $conversion['currency'];
+        $locale = ($locale === null) ? $this->container->get('request')->getLocale() : $locale;
+        
+        if (true === $byConfig) {
+            foreach ($this->transformers as $conversion) {
+                if ($locale == $conversion['locale']) {
+                    $currency = $conversion['currency'];
+                }
             }
+        } else {
+            $formatter = $this->getFormatter($locale);
+            if ('' !== $item = $formatter->getTextAttribute(\NumberFormatter::CURRENCY_CODE))
+                $currency = $item;
         }
         
         return $currency;
@@ -102,8 +116,9 @@ class CurrencyFormatter implements CurrencyFormatterInterface
      * @param $style
      * @return \NumberFormatter
      */
-    protected function getFormatter($culture = 'en', $style = \NumberFormatter::CURRENCY)
+    protected function getFormatter($culture = null, $style = \NumberFormatter::CURRENCY)
     {
+        $culture = ($culture === null) ? $this->container->get('request')->getLocale() : $culture;
         $formatter = new \NumberFormatter($culture, $style);
         return $formatter;
     }

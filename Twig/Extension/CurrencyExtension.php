@@ -96,7 +96,7 @@ class CurrencyExtension extends \Twig_Extension
             $amount = $this->formatCurrency(floatval($amount), $currency);
         }
         
-        return $this->currencyFormatter->parseSymbol($amount, $currency);
+        return $this->currencyFormatter->parseSymbolByAmount($amount, $currency);
     }
     
     /**

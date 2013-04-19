@@ -45,7 +45,15 @@ interface CurrencyFormatterInterface
      * @param string $currency
      * @return string
      */
-    function parseSymbol($amount, $currency = null);
+    function parseSymbolByAmount($amount, $currency = null);
+    
+    /**
+     * Localizará o símbolo monetário por uma cultura.
+     * 
+     * @param string $culture
+     * @return string
+     */
+    function parseSymbolByLocale($culture = null);
     
     /**
      * Efetuará o filtro para retornar somente o valor formatado da moeda.
@@ -65,8 +73,9 @@ interface CurrencyFormatterInterface
      * @see http://www.iso.org/iso/home/standards/currency_codes.htm
      * 
      * @param string $locale
+     * @param boolean $byConfig Utilizar-se do definido na configuração
      * @return string
      */
-    function getCurrencyByLocale($locale = null);
+    function getCurrencyByLocale($locale = null, $byConfig = true);
     
 }
