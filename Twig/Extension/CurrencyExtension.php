@@ -62,9 +62,9 @@ class CurrencyExtension extends \Twig_Extension
     public function convertCurrency($amount, $from, $to, $format = false, $provider_name = null)
     {
         $provider = (null === $provider_name) ? $this->defaultProvider : $provider_name;
-        $object = $this->conversionManager->convert($from, $to, $amount, $provider);
+        $amount = $this->conversionManager->convert($from, $to, $amount, $provider)->getConvertedAmount();
         if (true === $format) {
-            $amount = $this->formatCurrency($object->getConvertedAmount(), $to);
+            $amount = $this->formatCurrency($amount, $to);
         }
         
         return $amount;
