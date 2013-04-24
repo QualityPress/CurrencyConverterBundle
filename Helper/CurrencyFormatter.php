@@ -57,7 +57,8 @@ class CurrencyFormatter implements CurrencyFormatterInterface
     {
         $currency = (null === $currency) ? $this->getCurrencyByLocale() : $currency;
         $amount = $this->getFormatter()->parseCurrency($amount, $currency);
-        return number_format($amount, 2, $this->getFormatter()->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL), '');
+        
+        return number_format($amount, 2, $this->getFormatter()->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL), $this->getFormatter()->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL));
     }
     
     public function getCurrencyByLocale($locale = null, $byConfig = true)
