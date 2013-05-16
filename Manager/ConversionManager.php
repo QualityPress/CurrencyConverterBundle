@@ -50,7 +50,7 @@ class ConversionManager extends ConversionOperator implements ConversionManagerI
         }
     }
     
-    protected function getLastConversion($from, $to)
+    public function getLastConversion($from, $to)
     {
         $dql = 'SELECT c FROM ' . $this->entityClass . ' c WHERE c.fromCurrency = :from AND c.toCurrency = :to ORDER BY c.registeredAt DESC';
         $parameters = array('from' => $from, 'to' => $to);
@@ -72,6 +72,11 @@ class ConversionManager extends ConversionOperator implements ConversionManagerI
     public function getProvider($provider)
     {
         return $this->providerManager->get($provider);
+    }
+
+    public function getProviders()
+    {
+        return $this->providerManager->all();
     }
     
 }

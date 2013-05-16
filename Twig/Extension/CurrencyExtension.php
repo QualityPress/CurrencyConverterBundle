@@ -61,18 +61,32 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function convertCurrency($amount, $from, $to, $format = false, $provider_name = null)
     {
-        $provider = (null === $provider_name) ? $this->defaultProvider : $provider_name;
-        $amount = $this->conversionManager->convert($from, $to, $amount, $provider)->getConvertedAmount();
+        $defaultProvider = (null === $provider_name) ? $this->defaultProvider : $provider_name;
+
+        try {
+            $amount = $this->conversionManager->convert($from, $to, $amount, $defaultProvider)->getConvertedAmount();
+        } catch(\Exception $e) {
+            $conversion = $this->conversionManager->getLastConversion($from, $to);
+            if (true === is_object($conversion)) {
+                $amount = number_format($amount / $conversion->getRate(), 5, '.', '');
+                if ($conversion->getRegisteredAt()->getTimestamp() + 259200 < time()) {
+                    throw new \RuntimeException('Problemas com o provedor de conversão!');
+                }
+            } else {
+                throw $e;
+            }
+        }
+
         if (true === $format) {
             $amount = $this->formatCurrency($amount, $to);
         }
-        
+
         return $amount;
     }
-    
+
     /**
      * Formatará um valor conforme a moeda fornecida.
-     * 
+     *
      * @param decimal $amount
      * @param string $currency
      * @return string

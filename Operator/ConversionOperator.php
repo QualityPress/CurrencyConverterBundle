@@ -46,7 +46,7 @@ abstract class ConversionOperator implements ConversionOperatorInterface
      * 
      * @return null|ConversionInterface
      */
-    protected abstract function getLastConversion($from, $to);
+    public abstract function getLastConversion($from, $to);
     
     public function doConversion($provider, $from, $to, $amount)
     {
