@@ -32,6 +32,18 @@ class CurrencyFormatter implements CurrencyFormatterInterface
     
     public function format($amount, $currency)
     {
+        if (false === is_float($amount)) {
+            $p1 = strrpos($amount, '.');
+            $p2 = strrpos($amount, ',');
+
+            // Verificar se possui os dois separadores
+            if (null !== $p1 && null !== $p2) {
+                $amount = ($p1 > $p2) ? str_replace(',', '', $amount) : str_replace('.', '', $amount);
+            }
+
+            $amount = number_format(str_replace(',', '.', $amount), 2, '.', '');
+        }
+
         $amount = $this->getFormatter()->formatCurrency($amount, $currency);
         return $this->convertEncoding($amount);
     }

@@ -26,10 +26,13 @@ class Configuration implements ConfigurationInterface
                 // Conexão e ttl
                 ->scalarNode('connection')->isRequired()->end()
                 ->scalarNode('time_to_live')->defaultValue(3600)->end()
+
+                // Provedor padrão
+                ->scalarNode('default_provider')->isRequired()->end()
         
                 // Classes
                 ->arrayNode('classes')
-		    ->addDefaultsIfNotSet()
+		            ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('formatter')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Helper\\CurrencyFormatter')->end()
                         ->scalarNode('conversion')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Entity\\Conversion')->end()
@@ -65,15 +68,15 @@ class Configuration implements ConfigurationInterface
                 
                 // Twig
                 ->arrayNode('twig_extension')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Twig\\Extension\\CurrencyExtension')->end()
-                        ->scalarNode('default_provider')->isRequired()->end()
                     ->end()
                 ->end()
                 
                 // Sessão
                 ->arrayNode('storage')
-		    ->addDefaultsIfNotSet()
+		            ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->defaultValue('Quality\\Bundle\\CurrencyConverterBundle\\Storage\\CurrencyStorage')->end()
                         ->scalarNode('session_key')->defaultValue('_qualitypress.current-currency')->end()

@@ -28,7 +28,7 @@ services:
             - "@currency_converter.formatter"
             - "@currency_converter.manager"
             - "@currency_converter.storage"
-            - "%quality_currency_converter.twig_extension.default_provider%"
+            - "%quality_currency_converter.default_provider%"
         tags:
             - { name: twig.extension }
         
@@ -36,7 +36,7 @@ services:
     currency_converter.manager.provider:
         class           : "%quality_currency_converter.provider_manager.class%"
         public          : true
-        arguments       : []
+        arguments       : ["%quality_currency_converter.default_provider%"]
         
     ### Gerenciador da conversão junto ao banco de dados
     currency_converter.manager:

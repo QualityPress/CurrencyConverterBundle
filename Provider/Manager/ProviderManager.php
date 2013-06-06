@@ -11,8 +11,14 @@ namespace Quality\Bundle\CurrencyConverterBundle\Provider\Manager;
  */
 class ProviderManager implements ProviderManagerInterface
 {
-    
+
+    protected $defaultProvider;
     protected $providers;
+
+    public function __construct($defaultProviderName)
+    {
+        $this->defaultProvider = $defaultProviderName;
+    }
     
     public function count()
     {
@@ -37,6 +43,11 @@ class ProviderManager implements ProviderManagerInterface
     public function has($name)
     {
         return array_key_exists($name, $this->providers);
+    }
+
+    public function getDefaultProvider()
+    {
+        return $this->get($this->defaultProvider);
     }
     
 }

@@ -50,7 +50,8 @@ abstract class ConversionOperator implements ConversionOperatorInterface
     
     public function doConversion($provider, $from, $to, $amount)
     {
-        if (1 === bccomp(1, $amount)) {
+        $amount = $this->convertAmount($amount);
+        if (is_string($amount) && 1 === bccomp(1, $amount) || is_float($amount) && 1 > $amount) {
             throw new \OutOfBoundsException(sprintf(
                 'O valor fornecido "%s" deve ser um ou maior.',
                 $amount
@@ -88,6 +89,19 @@ abstract class ConversionOperator implements ConversionOperatorInterface
         ;
         
         return $conversion;
+    }
+
+    protected function convertAmount($amount)
+    {
+        $p1 = strrpos($amount, '.');
+        $p2 = strrpos($amount, ',');
+
+        // Verificar se possui os dois separadores
+        if (null !== $p1 && null !== $p2) {
+            $amount = ($p1 > $p2) ? str_replace(',', '', $amount) : str_replace('.', '', $amount);
+        }
+
+        return number_format(str_replace(',', '.', $amount), 5, '.', '');
     }
     
 }

@@ -58,6 +58,14 @@ class ConversionManager extends ConversionOperator implements ConversionManagerI
         return $this->entityManager->createQuery($dql)->setParameters($parameters)->setMaxResults(1)->getOneOrNullResult();
     }
 
+    public function getConversionByDate($from, $to, \DateTime $date)
+    {
+        $dql = 'SELECT c FROM ' . $this->entityClass . ' c WHERE c.fromCurrency = :from AND c.toCurrency = :to AND c.registeredAt >= :date ORDER BY c.registeredAt ASC';
+        $parameters = array('from' => $from, 'to' => $to, 'date' => $date->format('Y-m-d 00:00:00'));
+
+        return $this->entityManager->createQuery($dql)->setParameters($parameters)->setMaxResults(1)->getOneOrNullResult();
+    }
+
     protected function getTimeToLive()
     {
         return $this->timeToLive;

@@ -46,13 +46,13 @@ class QualityCurrencyConverterExtension extends Extension
         
         // Twig extension
         $container->setParameter('quality_currency_converter.twig_extension.class', $config['twig_extension']['class']);
-        $container->setParameter('quality_currency_converter.twig_extension.default_provider', $config['twig_extension']['default_provider']);
         
         // Storage
         $container->setParameter('quality_currency_converter.storage.class', $config['storage']['class']);
         $container->setParameter('quality_currency_converter.parameter.storage_key', $config['storage']['session_key']);
         
         // Definir provedores
+        $container->setParameter('quality_currency_converter.default_provider', $config['default_provider']);
         $this->compilerProviders($container, $config['providers']);
     }
     

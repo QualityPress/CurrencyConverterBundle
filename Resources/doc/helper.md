@@ -12,6 +12,7 @@ Segue comando:
 
 ```jinja
     {{ qp_get_defined_currency }}
+
 ```
 
 
@@ -32,6 +33,18 @@ Segue comando:
     {{ qp_convert_currency("1", "BRL", defaultCurrency, true, 'google_provider') }}
 ```
 
+
+### Conversão de moeda por uma data específica
+
+A conversão por uma data específica tentará localizar a data no no qual o devenvolvedor
+sugere para efetuar a busca da conversão.
+
+Caso não encontre, localizará a mais aproximada em datas posteriores a sugerida.
+
+Comando:
+```jinja
+    {{ qp_convert_currency_by_date("1", "BRL", defaultCurrency, date, true) }}
+```
 
 
 ## Filtros

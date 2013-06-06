@@ -4,6 +4,7 @@ namespace Quality\Bundle\CurrencyConverterBundle\Twig\Extension;
 
 use Quality\Bundle\CurrencyConverterBundle\Helper\CurrencyFormatterInterface;
 use Quality\Bundle\CurrencyConverterBundle\Manager\ConversionManagerInterface;
+use Quality\Bundle\CurrencyConverterBundle\Model\ConversionInterface;
 use Quality\Bundle\CurrencyConverterBundle\Storage\CurrencyStorage;
 
 /**
@@ -32,8 +33,9 @@ class CurrencyExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'qp_convert_currency'       => new \Twig_Function_Method($this, 'convertCurrency', array('is_safe' => array('html'))),
-            'qp_get_defined_currency'   => new \Twig_Function_Method($this, 'getDefinedCurrency', array('is_safe' => array('html'))),
+            'qp_convert_currency'           => new \Twig_Function_Method($this, 'convertCurrency', array('is_safe' => array('html'))),
+            'qp_convert_currency_by_date'   => new \Twig_Function_Method($this, 'convertCurrencyByDate', array('is_safe' => array('html'))),
+            'qp_get_defined_currency'       => new \Twig_Function_Method($this, 'getDefinedCurrency', array('is_safe' => array('html'))),
         );
     }
     
@@ -62,7 +64,6 @@ class CurrencyExtension extends \Twig_Extension
     public function convertCurrency($amount, $from, $to, $format = false, $provider_name = null)
     {
         $defaultProvider = (null === $provider_name) ? $this->defaultProvider : $provider_name;
-
         try {
             $amount = $this->conversionManager->convert($from, $to, $amount, $defaultProvider)->getConvertedAmount();
         } catch(\Exception $e) {
@@ -82,6 +83,35 @@ class CurrencyExtension extends \Twig_Extension
         }
 
         return $amount;
+    }
+
+    /**
+     * Efetuar a conversão de uma moeda através de uma consulta de data.
+     * Caso a consulta não existir, efetuará a consulta no dia.
+     *
+     * @param decimal $amount
+     * @param string $from
+     * @param string $to
+     * @param \DateTime $date
+     * @param bool $format
+     *
+     * @return float|decimal|string
+     */
+    public function convertCurrencyByDate($amount, $from, $to, \DateTime $date, $format = false)
+    {
+        $currencyConversion = $this->conversionManager->getConversionByDate($from, $to, $date);
+        if ($currencyConversion instanceof ConversionInterface) {
+            $rate = $currencyConversion->getRate();
+            $return = $amount / $rate;
+        } else {
+            $return = $this->convertCurrency($amount, $from, $to, false);
+        }
+
+        if (true === $format) {
+            $return = $this->formatCurrency($return, $to);
+        }
+
+        return $return;
     }
 
     /**
